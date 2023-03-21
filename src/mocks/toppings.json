@@ -1,0 +1,7 @@
+[
+  { "name": "Tomatoes", "price": 1.2 },
+  { "name": "Bacon", "price": 2.2 },
+  { "name": "Nuts", "price": 1.8 },
+  { "name": "Chicken", "price": 3.2 },
+  { "name": "Onions", "price": 1.2, "other": "test" }
+]
