@@ -1,6 +1,12 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestMiddleware,
+  NestModule,
+} from '@nestjs/common';
 import { DressingsService } from 'src/services/dressings.service';
 import { ToppingsService } from 'src/services/toppings.service';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { SaladController } from './salad.controller';
 import { SaladService } from './salad.service';
 
@@ -19,4 +25,8 @@ const pipeConfiguration = {
     },
   ],
 })
-export class SaladModule {}
+export class SaladModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes(SaladController);
+  }
+}
