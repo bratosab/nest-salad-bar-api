@@ -11,7 +11,15 @@ export class SaladService {
   private inMemorySalads: Salad[];
 
   constructor() {
-    this.inMemorySalads = [];
+    // this.inMemorySalads = [];
+    // FIXME: Mock
+    this.inMemorySalads = [
+      {
+        username: 'tom',
+        id: 'e299ea42-de92-4188-9d69-66b0c5b12b17',
+        date: new Date(),
+      },
+    ];
   }
 
   private findSalad(saladId: string): Salad {
@@ -39,6 +47,10 @@ export class SaladService {
   }
 
   setDressing(saladId: string, dressing: DressingDTO) {
-    this.findSalad(saladId).dressing = dressing;
+    const salad = this.findSalad(saladId);
+    if (dressing) {
+      salad.dressing = dressing;
+    }
+    return salad;
   }
 }
