@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { readFile } from 'fs/promises';
-import { Topping } from 'src/ingredient/interfaces/topping.interface';
+import { Topping } from 'src/interfaces/topping.interface';
 
 @Injectable()
 export class ToppingsService {
