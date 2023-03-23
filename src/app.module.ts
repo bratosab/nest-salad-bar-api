@@ -5,8 +5,9 @@ import { IngredientController } from './ingredient.controller';
 import { ToppingsService } from './services/toppings.service';
 import { DressingsService } from './services/dressings.service';
 import { SaladModule } from './salad/salad.module';
-import { RouterModule } from '@nestjs/core';
+import { APP_GUARD, RouterModule } from '@nestjs/core';
 import { DataModule } from './data/data.module';
+import { AuthGuard } from './Core/auth.guard';
 
 @Module({
   imports: [
@@ -20,6 +21,14 @@ import { DataModule } from './data/data.module';
     DataModule,
   ],
   controllers: [AppController, IngredientController],
-  providers: [AppService, ToppingsService, DressingsService],
+  providers: [
+    AppService,
+    ToppingsService,
+    DressingsService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
