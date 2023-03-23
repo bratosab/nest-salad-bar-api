@@ -34,7 +34,6 @@ export class SaladService {
 
   createSalad(salad: CreateSaladDTO): Observable<Salad> {
     const newSalad = { ...salad, id: randomUUID(), date: new Date() };
-    this.inMemorySalads.push(newSalad);
 
     return this.dataClient.send('create_salade', newSalad) as Observable<Salad>;
   }

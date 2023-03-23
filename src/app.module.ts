@@ -6,6 +6,7 @@ import { ToppingsService } from './services/toppings.service';
 import { DressingsService } from './services/dressings.service';
 import { SaladModule } from './salad/salad.module';
 import { RouterModule } from '@nestjs/core';
+import { DataModule } from './data/data.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { RouterModule } from '@nestjs/core';
         module: SaladModule,
       },
     ]),
+    DataModule,
   ],
   controllers: [AppController, IngredientController],
   providers: [AppService, ToppingsService, DressingsService],
