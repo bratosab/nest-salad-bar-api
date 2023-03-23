@@ -26,7 +26,7 @@ export class SaladController {
   ) {}
 
   @Get()
-  getAll(): Salad[] {
+  getAll(): Observable<Salad[]> {
     return this.saladService.getAll();
   }
 

@@ -15,7 +15,7 @@ export class IngredientController {
   ) {}
 
   @Get('toppings')
-  getToppings(): Promise<Topping[]> {
+  getToppings(): Observable<Topping[]> {
     return this.toppingsService.getAll();
   }
 

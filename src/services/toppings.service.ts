@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Scope } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { readFile } from 'fs/promises';
 import { Observable } from 'rxjs';
@@ -9,10 +9,8 @@ import { CreateToppingDTO } from 'src/salad/dto/create-topping.dto';
 export class ToppingsService {
   constructor(@Inject('DATA') private readonly dataClient: ClientProxy) {}
 
-  async getAll(): Promise<Topping[]> {
-    const toppingsFile = await readFile('./src/mocks/toppings.json', 'utf-8');
-
-    return JSON.parse(toppingsFile) as Topping[];
+  getAll(): Observable<Topping[]> {
+    return this.dataClient.send('get_toppings', {}) as Observable<Topping[]>;
   }
 
   add(newTopping: CreateToppingDTO): Observable<Topping> {

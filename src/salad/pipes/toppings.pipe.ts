@@ -16,23 +16,24 @@ export class ToppingsPipe implements PipeTransform {
   ) {}
 
   async transform(toppings: ToppingDTO[]) {
-    const existingToppings = await this.toppingsService.getAll();
+    return toppings;
+    // const existingToppings = await this.toppingsService.getAll();
 
-    const validatedToppings = toppings.reduce((validatedToppings, topping) => {
-      const found = existingToppings.find(
-        (t) => t.name === topping.name && t.price === topping.price,
-      );
-      if (found) {
-        validatedToppings.push(found);
-      } else if (this.pipeConfig.throwError) {
-        throw new HttpException(
-          `Unknown Topping : ${JSON.stringify(topping)}`,
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-      return validatedToppings;
-    }, []);
+    // const validatedToppings = toppings.reduce((validatedToppings, topping) => {
+    //   const found = existingToppings.find(
+    //     (t) => t.name === topping.name && t.price === topping.price,
+    //   );
+    //   if (found) {
+    //     validatedToppings.push(found);
+    //   } else if (this.pipeConfig.throwError) {
+    //     throw new HttpException(
+    //       `Unknown Topping : ${JSON.stringify(topping)}`,
+    //       HttpStatus.BAD_REQUEST,
+    //     );
+    //   }
+    //   return validatedToppings;
+    // }, []);
 
-    return validatedToppings;
+    // return validatedToppings;
   }
 }

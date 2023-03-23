@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotImplementedException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { randomUUID } from 'crypto';
 import { Observable } from 'rxjs';
@@ -10,42 +10,28 @@ import { Salad } from './interfaces/salad.interface';
 
 @Injectable()
 export class SaladService {
-  private inMemorySalads: Salad[];
-
-  constructor(@Inject('DATA') private readonly dataClient: ClientProxy) {
-    this.inMemorySalads = [];
-    // FIXME: Mock
-    // this.inMemorySalads = [
-    //   {
-    //     username: 'tom',
-    //     id: 'e299ea42-de92-4188-9d69-66b0c5b12b17',
-    //     date: new Date(),
-    //   },
-    // ];
-  }
+  constructor(@Inject('DATA') private readonly dataClient: ClientProxy) {}
 
   private findSalad(saladId: string): Salad {
-    return this.inMemorySalads.find((s) => s.id === saladId);
+    throw new NotImplementedException();
+    // return this.inMemorySalads.find((s) => s.id === saladId);
   }
 
-  getAll(): Salad[] {
-    return this.inMemorySalads;
+  getAll(): Observable<Salad[]> {
+    return this.dataClient.send('get_salads', {}) as Observable<Salad[]>;
   }
 
   createSalad(salad: CreateSaladDTO): Observable<Salad> {
     const newSalad = { ...salad, id: randomUUID(), date: new Date() };
 
-    return this.dataClient.send('create_salade', newSalad) as Observable<Salad>;
+    return this.dataClient.send('create_salad', newSalad) as Observable<Salad>;
   }
 
   addToppings(saladId: string, toppings: ToppingDTO[]) {
-    const salad = this.findSalad(saladId);
-    if (salad?.toppings?.length) {
-      salad.toppings.push(...toppings);
-    } else {
-      salad.toppings = toppings;
-    }
-    return salad;
+    return this.dataClient.send('add_toppings_salad', {
+      saladId,
+      toppings,
+    }) as Observable<Salad>;
   }
 
   setDressing(saladId: string, dressing: DressingDTO) {
