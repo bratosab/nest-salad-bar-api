@@ -8,6 +8,7 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common';
+import { Observable } from 'rxjs';
 import { ToppingsService } from 'src/services/toppings.service';
 import { CreateSaladDTO } from './dto/create-salad.dto';
 import { DressingDTO } from './dto/dressing.dto';
@@ -30,7 +31,7 @@ export class SaladController {
   }
 
   @Post()
-  makeSalad(@Body() salad: CreateSaladDTO): Salad {
+  makeSalad(@Body() salad: CreateSaladDTO): Observable<Salad> {
     return this.saladService.createSalad(salad);
   }
 

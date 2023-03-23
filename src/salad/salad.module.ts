@@ -4,6 +4,7 @@ import {
   NestMiddleware,
   NestModule,
 } from '@nestjs/common';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { DressingsService } from 'src/services/dressings.service';
 import { ToppingsService } from 'src/services/toppings.service';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
@@ -23,6 +24,17 @@ const pipeConfiguration = {
       provide: 'PIPE_CONFIG',
       useValue: pipeConfiguration,
     },
+  ],
+  imports: [
+    ClientsModule.register([
+      {
+        name: 'DATA',
+        transport: Transport.TCP,
+        options: {
+          port: 3002,
+        },
+      },
+    ]),
   ],
 })
 export class SaladModule implements NestModule {

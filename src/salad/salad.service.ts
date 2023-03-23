@@ -1,5 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { randomUUID } from 'crypto';
+import { Observable } from 'rxjs';
 import { Topping } from 'src/interfaces/topping.interface';
 import { CreateSaladDTO } from './dto/create-salad.dto';
 import { DressingDTO } from './dto/dressing.dto';
@@ -10,16 +12,16 @@ import { Salad } from './interfaces/salad.interface';
 export class SaladService {
   private inMemorySalads: Salad[];
 
-  constructor() {
-    // this.inMemorySalads = [];
+  constructor(@Inject('DATA') private readonly dataClient: ClientProxy) {
+    this.inMemorySalads = [];
     // FIXME: Mock
-    this.inMemorySalads = [
-      {
-        username: 'tom',
-        id: 'e299ea42-de92-4188-9d69-66b0c5b12b17',
-        date: new Date(),
-      },
-    ];
+    // this.inMemorySalads = [
+    //   {
+    //     username: 'tom',
+    //     id: 'e299ea42-de92-4188-9d69-66b0c5b12b17',
+    //     date: new Date(),
+    //   },
+    // ];
   }
 
   private findSalad(saladId: string): Salad {
@@ -30,10 +32,11 @@ export class SaladService {
     return this.inMemorySalads;
   }
 
-  createSalad(salad: CreateSaladDTO): Salad {
+  createSalad(salad: CreateSaladDTO): Observable<Salad> {
     const newSalad = { ...salad, id: randomUUID(), date: new Date() };
     this.inMemorySalads.push(newSalad);
-    return newSalad;
+
+    return this.dataClient.send('create_salade', newSalad) as Observable<Salad>;
   }
 
   addToppings(saladId: string, toppings: ToppingDTO[]) {
