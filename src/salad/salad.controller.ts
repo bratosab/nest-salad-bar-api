@@ -10,9 +10,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { AuthGuard } from 'src/Core/auth.guard';
 import { LoggingInterceptor } from 'src/core/logging.interceptor';
-import { ToppingsService } from 'src/services/toppings.service';
 import { CreateSaladDTO } from './dto/create-salad.dto';
 import { DressingDTO } from './dto/dressing.dto';
 import { ToppingDTO } from './dto/topping.dto';
@@ -24,10 +22,7 @@ import { SaladService } from './salad.service';
 @Controller()
 @UseInterceptors(LoggingInterceptor)
 export class SaladController {
-  constructor(
-    private saladService: SaladService,
-    private toppingsService: ToppingsService,
-  ) {}
+  constructor(private saladService: SaladService) {}
 
   @Get()
   getAll(): Observable<Salad[]> {
