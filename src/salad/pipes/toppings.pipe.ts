@@ -5,15 +5,15 @@ import {
   Injectable,
   PipeTransform,
 } from '@nestjs/common';
-import { ToppingsService } from 'src/services/toppings.service';
+import { ToppingsService } from '../../services/toppings.service';
 import { ToppingDTO } from '../dto/topping.dto';
 
 @Injectable()
 export class ToppingsPipe implements PipeTransform {
-  constructor(
-    private toppingsService: ToppingsService,
-    @Inject('PIPE_CONFIG') private pipeConfig,
-  ) {}
+  // constructor(
+  //   private toppingsService: ToppingsService,
+  //   @Inject('PIPE_CONFIG') private pipeConfig,
+  // ) {}
 
   async transform(toppings: ToppingDTO[]) {
     return toppings;

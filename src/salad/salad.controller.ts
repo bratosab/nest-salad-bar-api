@@ -6,11 +6,10 @@ import {
   ParseArrayPipe,
   ParseUUIDPipe,
   Post,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { LoggingInterceptor } from 'src/core/logging.interceptor';
+import { LoggingInterceptor } from '../core/logging.interceptor';
 import { CreateSaladDTO } from './dto/create-salad.dto';
 import { DressingDTO } from './dto/dressing.dto';
 import { ToppingDTO } from './dto/topping.dto';
@@ -43,7 +42,7 @@ export class SaladController {
         whitelist: true,
         forbidNonWhitelisted: true,
       }),
-      ToppingsPipe,
+      // ToppingsPipe,
     )
     toppings: ToppingDTO[],
   ) {

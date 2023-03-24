@@ -1,9 +1,8 @@
-import { Inject, Injectable, Scope } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { readFile } from 'fs/promises';
 import { Observable } from 'rxjs';
-import { Topping } from 'src/interfaces/topping.interface';
-import { CreateToppingDTO } from 'src/salad/dto/create-topping.dto';
+import { Topping } from '../interfaces/topping.interface';
+import { CreateToppingDTO } from '../salad/dto/create-topping.dto';
 
 @Injectable()
 export class ToppingsService {

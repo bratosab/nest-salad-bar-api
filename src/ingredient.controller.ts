@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { DressingsService } from 'src/services/dressings.service';
-import { ToppingsService } from 'src/services/toppings.service';
+import { DressingsService } from './services/dressings.service';
+import { ToppingsService } from './services/toppings.service';
 import { Dressing } from './interfaces/dressing.interface';
 import { Topping } from './interfaces/topping.interface';
 import { CreateDressingDTO } from './salad/dto/create-dressing.dto';

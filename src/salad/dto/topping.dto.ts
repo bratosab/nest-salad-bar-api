@@ -1,5 +1,5 @@
 import { IsNotEmpty, isNumber, IsNumber } from 'class-validator';
-import { Topping } from 'src/interfaces/topping.interface';
+import { Topping } from '../../interfaces/topping.interface';
 
 export class ToppingDTO implements Topping {
   @IsNumber()

@@ -2,7 +2,6 @@ import { Inject, Injectable, NotImplementedException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { randomUUID } from 'crypto';
 import { Observable } from 'rxjs';
-import { Topping } from 'src/interfaces/topping.interface';
 import { CreateSaladDTO } from './dto/create-salad.dto';
 import { DressingDTO } from './dto/dressing.dto';
 import { ToppingDTO } from './dto/topping.dto';

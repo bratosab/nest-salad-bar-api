@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { Dressing } from 'src/interfaces/dressing.interface';
-import { CreateDressingDTO } from 'src/salad/dto/create-dressing.dto';
+import { Dressing } from '../interfaces/dressing.interface';
+import { CreateDressingDTO } from '../salad/dto/create-dressing.dto';
 
 @Injectable()
 export class DressingsService {

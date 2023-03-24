@@ -5,13 +5,12 @@ import {
   Injectable,
   PipeTransform,
 } from '@nestjs/common';
-import { DressingsService } from 'src/services/dressings.service';
 import { DressingDTO } from '../dto/dressing.dto';
 
 @Injectable()
 export class DressingPipe implements PipeTransform {
   constructor(
-    private dressingsService: DressingsService,
+    // private dressingsService: DressingsService,
     @Inject('PIPE_CONFIG') private pipeConfig,
   ) {}
 
