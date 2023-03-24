@@ -16,10 +16,19 @@ export class SaladService {
     // return this.inMemorySalads.find((s) => s.id === saladId);
   }
 
+  /**
+   * Get all salads
+   * @returns An observable containes all salads
+   */
   getAll(): Observable<Salad[]> {
     return this.dataClient.send('get_salads', {}) as Observable<Salad[]>;
   }
 
+  /**
+   * Create a new salad
+   * @param salad the salad to create
+   * @returns An observable containing the salad just created
+   */
   createSalad(salad: CreateSaladDTO): Observable<Salad> {
     const newSalad = { ...salad, id: randomUUID(), date: new Date() };
 
