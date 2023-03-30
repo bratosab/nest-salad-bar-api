@@ -8,6 +8,7 @@ import { SaladModule } from './salad/salad.module';
 import { APP_GUARD, RouterModule } from '@nestjs/core';
 import { DataModule } from './data/data.module';
 import { AuthGuard } from './Core/auth.guard';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -19,6 +20,9 @@ import { AuthGuard } from './Core/auth.guard';
       },
     ]),
     DataModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
   ],
   controllers: [AppController, IngredientController],
   providers: [

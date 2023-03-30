@@ -1,10 +1,5 @@
-import {
-  MiddlewareConsumer,
-  Module,
-  NestMiddleware,
-  NestModule,
-} from '@nestjs/common';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { DataModule } from '../data/data.module';
 import { DressingsService } from '../services/dressings.service';
 import { ToppingsService } from '../services/toppings.service';
@@ -26,7 +21,7 @@ const pipeConfiguration = {
       useValue: pipeConfiguration,
     },
   ],
-  imports: [DataModule],
+  imports: [DataModule, ConfigModule],
 })
 export class SaladModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
